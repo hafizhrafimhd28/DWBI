@@ -1,0 +1,45 @@
+1.	CREATE TABLE customer (
+		custno varchar(10) NOT NULL,
+		custname varchar(30) NOT NULL,
+		address varchar(30) NOT NULL,
+		Internal varchar(1) NOT NULL,
+		contact varchar(30) NOT NULL,
+		phone varchar(10) NOT NULL,
+		city varchar(15) NOT NULL,
+		state varchar(2) NOT NULL,
+		zip varchar(5) NOT NULL,
+		CONSTRAINT customerPk PRIMARY KEY (custno)
+	);
+
+2.	CREATE TABLE facility (
+		facno varchar(10) NOT NULL,
+		facname varchar(30) NOT NULL,
+		CONSTRAINT facilityPk PRIMARY KEY (facno)
+	);
+
+3.	CREATE TABLE location (
+		locno varchar(10),
+		facno varchar(10),
+		locname varchar(30) NOT NULL,
+		CONSTRAINT locationPk PRIMARY KEY (locno)
+	);
+
+4.	Hanya ada 1 hubungan Foreign key pada kasus ini yaitu Hubungan kolom facno pada tabel Facility dengan kolom facno pada tabel Location. Tabel Facility adalah tabel parent pada hubungan ini karena tabel ini merupakan tabel referensi sementara tabel location adalah tabel child.
+
+5.	CREATE TABLE location (
+		locno varchar(10),
+		facno varchar(10),
+		locname varchar(30) NOT NULL,
+		CONSTRAINT locationPk PRIMARY KEY (locno),
+		CONSTRAINT locationFk FOREIGN KEY (facno) REFERENCES facility(facno)
+	);
+
+6.	Sejauh yang Saya ketahui, NULL tidak boleh digunakan dalam Foreign Key. Tetapi mungkin dalam kasus ini bisa terjadi karena Foreign key mengharuskan nilainya sudah ada terlebih dahulu dari tabel yang berbeda karena disini NULL berarti kita belum mengetahui berapa nilai tersebut bukan tidak ada nilai.	
+
+7.	CREATE TABLE facility (
+		facno varchar(10) NOT NULL,
+		facname varchar(30) NOT NULL,
+		CONSTRAINT facilityPk PRIMARY KEY (facno),
+		CONSTRAINT UniqueFacilityName UNIQUE (facname)
+	);
+
